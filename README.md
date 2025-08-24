@@ -1,6 +1,8 @@
-# Pulse Fintech
+# Fintech Lead Enrichment
 
-Pulse Fintech is a full-stack web application designed to capture and enrich leads for financial technology solutions. The frontend, built with React and TypeScript, provides a user-friendly contact form, while the backend, powered by FastAPI and Python, saves leads to a Supabase database and enriches them using AI-driven research agents. The app is ideal for businesses seeking to collect and analyze lead data efficiently.
+![Flow](flow.png)
+
+This is a full-stack web application designed to capture and enrich leads for an imagnary company called Pulse Fintech. The frontend, built with React and TypeScript, provides a user-friendly contact form, while the backend, powered by FastAPI and Python, saves leads to a Supabase database and enriches them using AI-driven research agents. The app is ideal for businesses seeking to collect and analyze lead data efficiently.
 
 ## Table of Contents
 - [Features](#features)
@@ -33,16 +35,22 @@ pulse-fintech/
 │   │   │   │   ├── leads.py          # Handles /api/enrich-lead
 │   │   ├── agents/
 │   │   │   ├── lead_enrich/
-│   │   │   │   ├── company_research_agent.py  # Company data research
-│   │   │   │   ├── person_research_agent.py   # Person data research
-│   │   │   │   ├── structuring_agent.py      # Structures data
+│   │   │   │   ├── agent.py
+│   │   │   │   ├── subagents/
+│   │   │   │   │   ├── company_research_agent/
+│   │   │   │   │   │   ├── agent.py  # Company data research
+│   │   │   │   │   ├── person_research_agent/
+│   │   │   │   │   │   ├── agent.py   # Person data research
+│   │   │   │   │   └── structuring_agent/
+│   │   │   │   │       └── agent.py      # Structures data
 │   │   ├── schemas/
 │   │   │   ├── lead.py              # Pydantic models (Contact, Lead, EnrichedLead, DataEnrichment)
 │   │   ├── utils/
 │   │   │   ├── lead_enrichment.py   # Enrichment processor
 │   │   ├── config/
-│   │   │   ├── logging.py           # Logging configuration
-│   │   │   ├── supabase.py          # Supabase client
+│   │   │   ├── langfuse_config.py   # Langfuse configuration
+│   │   │   ├── logging_config.py    # Logging configuration
+│   │   │   ├── supebase_config.py   # Supabase client
 │   │   ├── main.py                  # FastAPI app entry point
 │   ├── .env                         # Environment variables
 │   ├── requirements.txt             # Python dependencies
@@ -101,27 +109,7 @@ pulse-fintech/
 
 4. **Supabase Setup**:
    - Create a Supabase project at https://supabase.com.
-   - Create a table named `leads_table` with the following schema:
-     ```sql
-     CREATE TABLE leads_table (
-       id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-       first_name TEXT,
-       last_name TEXT,
-       email TEXT,
-       contact_number TEXT,
-       city TEXT,
-       country TEXT,
-       company TEXT,
-       interested_in TEXT,
-       inquiry TEXT,
-       enrichment_flag BOOLEAN DEFAULT FALSE,
-       company_data JSONB,
-       person_data JSONB,
-       lead_score FLOAT,
-       enrichment_status TEXT,
-       error_details TEXT
-     );
-     ```
+   - Create a table named `leads_table` as in supabase.sql
    - Note the project’s URL and API key for the `.env` file.
 
 ## Running the Application
