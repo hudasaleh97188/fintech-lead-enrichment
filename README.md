@@ -205,3 +205,6 @@ GOOGLE_ADK_API_KEY=your-google-adk-api-key
 - **Enrichment Issues**:
   - Ensure Google ADK credentials are valid.
   - Check logs in `backend/src/agents/lead_enrich/` for agent errors.
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request.
